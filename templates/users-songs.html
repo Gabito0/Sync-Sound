@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% block title %}My Songs{% endblock %}{% block
+content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      {% if user.songs %}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Song</th>
+              <th scope="col">Artist</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for song in user.songs %}
+            <tr class="table-secondary">
+              <td>
+                <a
+                  href="/play"
+                  data-song="{{song.song_id}}"
+                  data-uri="{{song.song_uri}}"
+                  >{{song.name}}</a
+                >
+              </td>
+              <td>{{song.artist}}</td>
+              <td>
+                <div class="m-sm float-end">
+                  <form action="/remove-song" method="POST">
+                    <input
+                      type="hidden"
+                      name="song_name"
+                      value="{{song.name}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="artist"
+                      value="{{song.artist}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="song_id"
+                      value="{{song.song_id}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="song_uri"
+                      value="{{song.song_uri}}"
+                    />
+                    <button class="btn btn-md px-2 py-0" type="submit">
+                      <i class="fa-solid fa-heart"></i>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %} {% else %}
+            <p>
+              You currently don't have any songs added.
+              <a href="/home">Starting adding songs!</a>
+            </p>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

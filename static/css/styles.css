@@ -1,0 +1,13 @@
+iframe {
+  display: block;
+  height: 80px;
+}
+
+#main-container {
+  margin-bottom: 70px;
+}
+
+.custom-margin-top {
+  border-collapse: separate;
+  border-spacing: 0 1rem; /* Adjust the value as needed */
+}

@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% block title %}Local Release{% endblock %} {% block
+content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Song</th>
+              <th scope="col">Artist</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if song_artist_uri_id_dict.items() %} {% for song_name,
+            (artist_name, id, uri) in song_artist_uri_id_dict.items() %}
+            <tr class="table-secondary">
+              <td>
+                <a href="#" data-song="{{id}}" data-uri="{{uri}}"
+                  >{{song_name}}</a
+                >
+              </td>
+              <td>
+                {{', '.join(artist_name)}} {% if uri in songs_uri%}
+                <div class="m-sm float-end">
+                  <form action="/remove-song" method="POST">
+                    <input
+                      type="hidden"
+                      name="song_name"
+                      value="{{song_name}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="artist"
+                      value="{{artist_name}}"
+                    />
+                    <input type="hidden" name="song_id" value="{{id}}" />
+                    <input type="hidden" name="song_uri" value="{{uri}}" />
+                    <button class="btn btn-md px-2 py-0" type="submit">
+                      <i class="fa-solid fa-heart"></i>
+                    </button>
+                  </form>
+                </div>
+                {% else %}
+                <div class="m-sm float-end">
+                  <form action="/save-song" method="POST">
+                    <input
+                      type="hidden"
+                      name="song_name"
+                      value="{{song_name}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="artist"
+                      value="{{artist_name}}"
+                    />
+                    <input type="hidden" name="song_id" value="{{id}}" />
+                    <input type="hidden" name="song_uri" value="{{uri}}" />
+                    <button class="btn btn-md px-2 py-0" type="submit">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  </form>
+                </div>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %} {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
