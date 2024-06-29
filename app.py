@@ -81,14 +81,14 @@ def update_sesssions():
   if referrer:
      session['previous_page'] = referrer
   else:
-     session['previous_page'] = 'http://localhost:5000/home'
+     session['previous_page'] = 'https://syncandsound.onrender.com'
   print("session[previous_page]", session['previous_page'])
   
   if session['previous_page']:
     # if none of the selected routes are in the session['previous_page],
     # set session['previous_page'] to home route.
     if 'home' not in session['previous_page'] and 'local-release' not in session['previous_page'] and 'my-songs' not in session['previous_page']:
-      session['previous_page'] = 'http://localhost:5000/home'
+      session['previous_page'] = 'https://syncandsound.onrender.com'
       # session['previous_page'] = request.referrer
       print("session[previous_page] after if statement", session['previous_page'])
 
