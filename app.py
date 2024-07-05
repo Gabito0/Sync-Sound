@@ -306,7 +306,6 @@ def callback():
   Grabs token and refresh token.
   """
   if 'error' in request.args:
-    print("error has been called")
     clear_sessions()
     return redirect(url_for("sign_in"))
   if 'code' in request.args:
