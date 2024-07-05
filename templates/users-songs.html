@@ -23,8 +23,9 @@ content %}
                   >{{song.name}}</a
                 >
               </td>
-              <td>{{song.artist}}</td>
               <td>
+                {{song.artist}}
+
                 <div class="m-sm float-end">
                   <form action="/remove-song" method="POST">
                     <input

@@ -201,7 +201,7 @@ class UserViewTestCase(TestCase):
     def test_delete_user(self):
         """
         Does profile DELETE works?
-        Please comment out the crsf in the delete route.
+        Please comment out `validate_csrf(csrf_token)` in the delete route.
         """
         with self.client as client:
             self.login_and_set_session()

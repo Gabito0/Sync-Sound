@@ -3,6 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
+      {% if song_artist_uri_id_dict and song_artist_uri_id_dict.items() %}
       <div class="table-responsive">
         <table class="table table-hover">
           <thead class="thead-dark">
@@ -12,8 +13,8 @@
             </tr>
           </thead>
           <tbody>
-            {% if song_artist_uri_id_dict.items() %} {% for song_name,
-            (artist_name, id, uri) in song_artist_uri_id_dict.items() %}
+            {% for song_name, (artist_name, id, uri) in
+            song_artist_uri_id_dict.items() %}
             <tr class="table-secondary">
               <td>
                 <a href="#" data-song="{{id}}" data-uri="{{uri}}"
@@ -64,7 +65,12 @@
                 {% endif %}
               </td>
             </tr>
-            {% endfor %} {% endif %}
+            {% endfor %} {% else %}
+            <p>
+              Yep! I'm waiting for those songs to load too ...
+              <a href="/home">Try again later!</a>
+            </p>
+            {% endif %}
           </tbody>
         </table>
       </div>

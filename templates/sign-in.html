@@ -1,5 +1,18 @@
 {% extends "base.html" %} {% block content %}
 <div class="container">
+  <div class="alert alert-warning" role="alert">
+    <strong>**ATTENTION**</strong> By creating an account or signing in, you
+    agree to allow Sync & Sound to access and use your Spotify account
+    information to enhance your experience by finding new songs through your
+    playlists. This includes accessing account country, explicit content filter
+    settings, public playlists, playlists you've created, and playlists you
+    follow. For more details, please refer to our
+    <a
+      href="https://developer.spotify.com/documentation/web-api/concepts/scopes"
+      target="_blank"
+      >Spotify Scopes Documentation</a
+    >.
+  </div>
   <form method="POST">
     {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
     'hidden' %}
@@ -12,5 +25,12 @@
 
     <button class="btn btn-success" type="submit">Sign In</button>
   </form>
+</div>
+
+{% endblock %} {% block github %}
+<div id="footer" class="footer fixed-bottom text-center">
+  <a href="https://github.com/Gabito0/Sync-and-Sound" target="_blank">
+    <i class="fab fa-github"></i> GitHub
+  </a>
 </div>
 {% endblock %}
