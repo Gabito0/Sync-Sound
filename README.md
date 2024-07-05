@@ -72,7 +72,7 @@ flask run
 - Saving song
   ![alt text](/imgs/saving_song.png)
 
-- Song Page
+- My songs page
   ![alt text](/imgs/my_songs.png)
 
 4. Users can stream music from the website using Spotify's iframes by clicking on the song's name.
