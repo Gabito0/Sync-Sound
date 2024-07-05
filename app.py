@@ -115,15 +115,15 @@ def update_sesssions():
   if referrer:
     session['previous_page'] = referrer
   else:
-    session['previous_page'] = 'https://syncandsound.onrender.com'
-    # session['previous_page'] = 'http://localhost:5000/home' 
+    # session['previous_page'] = 'https://syncandsound.onrender.com'
+    session['previous_page'] = 'http://localhost:5000/home' 
   
   if session['previous_page']:
     # if none of the selected routes are in the session['previous_page],
     # set session['previous_page'] to home route.
     if 'home' not in session['previous_page'] and 'local-release' not in session['previous_page'] and 'my-songs' not in session['previous_page']:
-      session['previous_page'] = 'https://syncandsound.onrender.com'
-      # session['previous_page'] = 'http://localhost:5000/home' 
+      # session['previous_page'] = 'https://syncandsound.onrender.com'
+      session['previous_page'] = 'http://localhost:5000/home' 
 
   if CURR_USER_KEY in session:
     # if CURR_USER_KEY exist in the session, search the user in the db
@@ -286,8 +286,8 @@ def connect_spotify():
   """
   Connects to user's spotify account.
   """
-
-  scope ='user-read-private user-read-email playlist-read-private'
+  # scopes  user-read-private user-read-email playlist-read-private
+  scope ='user-read-private'
   params = {
     'client_id': CLIENT_ID,
     'response_type': 'code',
