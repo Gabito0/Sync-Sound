@@ -53,34 +53,6 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
  * PUT method
  */
 
-// document
-//   .getElementById("profileForm")
-//   .addEventListener("submit", async function (event) {
-//     event.preventDefault();
-
-//     let formData = new FormData(this);
-//     let data = {};
-
-//     formData.forEach((value, key) => {
-//       data[key] = value;
-//     });
-//     try {
-//       let response = await axios.put("/profile", data);
-//       if (response.data.success) {
-//         window.location.href = "/profile";
-//         let password = formData.get("password");
-//         password = "";
-//       } else {
-//         alert(response.data.message);
-//       }
-//     } catch (error) {
-//       console.error("Error:", error);
-//       alert(
-//         "An error occurred while updating your profile. Please try again later."
-//       );
-//     }
-//   });
-
 document.addEventListener("DOMContentLoaded", function () {
   const profileForm = document.getElementById("profileForm");
 
@@ -114,28 +86,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /**DELETE method */
 
-document
-  .getElementById("deleteButton")
-  .addEventListener("click", async function (event) {
-    // event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const deleteBtn = document.getElementById("deleteButton");
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
 
-    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+      const csrfToken = document.querySelector(
+        'input[name="csrf_token"]'
+      ).value;
 
-    try {
-      let response = await axios.delete("/profile", {
-        headers: {
-          "X-CSRFToken": csrfToken,
-        },
-      });
-      if (response.data.success) {
-        window.location.href = "/sign-in";
-      } else {
-        alert(response.data.message);
+      try {
+        let response = await axios.delete("/profile", {
+          headers: {
+            "X-CSRFToken": csrfToken,
+          },
+        });
+        if (response.data.success) {
+          window.location.href = "/sign-in";
+        } else {
+          alert(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert(
+          "An error occurred while deleting your profile. Please try again later."
+        );
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert(
-        "An error occurred while deleting your profile. Please try again later."
-      );
-    }
-  });
+    });
+  }
+});
