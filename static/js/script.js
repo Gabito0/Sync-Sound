@@ -42,11 +42,6 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
           console.log("clicked");
           const spotifyUri = song.getAttribute("data-uri");
           EmbedController.loadUri(spotifyUri);
-          // setTimeout(() => {
-          //   EmbedController.play();
-          // }, 2000);
-          // EmbedController.play();
-          // console.log("Playing");
         });
       });
     });
@@ -58,33 +53,64 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
  * PUT method
  */
 
-document
-  .getElementById("profileForm")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault();
+// document
+//   .getElementById("profileForm")
+//   .addEventListener("submit", async function (event) {
+//     event.preventDefault();
 
-    let formData = new FormData(this);
-    let data = {};
+//     let formData = new FormData(this);
+//     let data = {};
 
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    try {
-      let response = await axios.put("/profile", data);
-      if (response.data.success) {
-        window.location.href = "/profile";
-        let password = formData.get("password");
-        password = "";
-      } else {
-        alert(response.data.message);
+//     formData.forEach((value, key) => {
+//       data[key] = value;
+//     });
+//     try {
+//       let response = await axios.put("/profile", data);
+//       if (response.data.success) {
+//         window.location.href = "/profile";
+//         let password = formData.get("password");
+//         password = "";
+//       } else {
+//         alert(response.data.message);
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert(
+//         "An error occurred while updating your profile. Please try again later."
+//       );
+//     }
+//   });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const profileForm = document.getElementById("profileForm");
+
+  if (profileForm) {
+    profileForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      let formData = new FormData(this);
+      let data = {};
+
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      try {
+        let response = await axios.put("/profile", data);
+        if (response.data.success) {
+          window.location.href = "/profile";
+        } else {
+          alert(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert(
+          "An error occurred while updating your profile. Please try again later."
+        );
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert(
-        "An error occurred while updating your profile. Please try again later."
-      );
-    }
-  });
+    });
+  }
+});
 
 /**DELETE method */
 
