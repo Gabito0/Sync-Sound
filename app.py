@@ -210,16 +210,16 @@ def get_spotify_playlist_tracks(playlist_name):
           return song_artist_uri_id_dict
         except ValueError as e:
           print("Getting playlist tracks failed:", e)
-          return jsonify({'Error': "Getting playlists track's failed"})
+          raise NotFound(description="Playlist not found")
       else:
         print("Error:", new_release_resp)
-        return jsonify({'Error': "Getting playlist's tracks failed"})
+        raise NotFound(description="Playlist not found")
     except ValueError as e:
       print('Request failed to grab playlist name:', e)
-      return jsonify({'Error': "Finding playlist failed"})
+      raise NotFound(description="Playlist not found")
   else:
     print("Error:", playlist_resp.status_code)
-    return redirect(url_for('handle_error'))
+    raise NotFound(description="Playlist not found")
 
 #################### signing in/up routes ####################
 @app.route('/sign-up', methods=["GET", "POST"])
